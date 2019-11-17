@@ -1,6 +1,8 @@
 package ru.avalon.java.j20.labs.models;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * Модель получения последовательности чисел Фибоначчи.
@@ -18,11 +20,22 @@ import java.util.Iterator;
  */
 public class Fibonacci implements Iterable<Integer> {
 
+
     /**
      * Итератор, выполняющий обход последовательности
      * чисел Фибоначчи.
      */
     private static class FibonacciIterator implements Iterator<Integer> {
+
+        private int count;
+        private int prevF;
+        private int prevS;
+
+        public FibonacciIterator() {
+            this.count = 0;
+            this.prevF = 1;
+            this.prevS = 0;
+        }
 
         /**
          * Определяет, есть ли следующее значение
@@ -34,7 +47,8 @@ public class Fibonacci implements Iterable<Integer> {
          */
         @Override
         public boolean hasNext() {
-            throw new UnsupportedOperationException("Not implemented yet!");
+//            throw new UnsupportedOperationException("Not implemented yet!");
+            return true;
         }
 
         /**
@@ -45,8 +59,21 @@ public class Fibonacci implements Iterable<Integer> {
          */
         @Override
         public Integer next() {
-            throw new UnsupportedOperationException("Not implemented yet!");
+            int res;
+            if (count == 0) {
+                count++;
+                return prevS;
+            } else if (count == 1){
+                count++;
+                return prevF;
+            } else {
+                res = prevF + prevS;
+                prevS = prevF;
+                prevF = res;
+                return res;
+            }
         }
+//            throw new UnsupportedOperationException("Not implemented yet!");
     }
 
     /**
@@ -59,4 +86,20 @@ public class Fibonacci implements Iterable<Integer> {
     public Iterator<Integer> iterator() {
         return new FibonacciIterator();
     }
+
+
+    public List<Integer> getFirstNNumbers(int count) {
+        List<Integer> res = new ArrayList<>();
+
+        Iterator<Integer> it1 = iterator();
+
+        for(int i = 0; i < count; ++i) {
+            res.add(it1.next());
+        }
+
+        return res;
+    }
+
+
+
 }

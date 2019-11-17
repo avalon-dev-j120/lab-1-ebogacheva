@@ -40,7 +40,11 @@ public final class Numbers {
 
     public static <T extends Number> double avg(T[] values){
 
-        return sum (values) / values.length;
+        if (values.length == 0){
+            return 0.0;
+        } else {
+            return sum (values) / values.length;
+        }
     }
 
 
