@@ -17,12 +17,15 @@ public class Task3 implements Task {
     @Override
     public void run() {
 
-        Fibonacci fibonacci = new Fibonacci();
-        List<Integer> arrayList = fibonacci.getFirstNNumbers(20);
+        int length = 20;
+        Fibonacci fibonacci = new Fibonacci(length);
+        Iterator<Integer> iterator = fibonacci.iterator();
+
         int sum = 0;
-        for (int value : arrayList){
-            sum += value;
+        while (iterator.hasNext()){
+            sum += iterator.next();
         }
+
         /*
          * TODO(Студент): Выполнить задание №3
          *

@@ -50,8 +50,8 @@ public class Point <T extends Number>{
      * @return дистанция между точками
      */
     public double distanceTo(Point point) {
-        double dx = x.doubleValue() - point.x.doubleValue();
-        double dy = y.doubleValue() - point.y.doubleValue();
+        final double dx = x.doubleValue() - point.x.doubleValue();
+        final double dy = y.doubleValue() - point.y.doubleValue();
         return Math.sqrt(dx * dx + dy * dy);
     }
 }

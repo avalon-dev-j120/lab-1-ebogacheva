@@ -21,6 +21,11 @@ import java.util.List;
 public class Fibonacci implements Iterable<Integer> {
 
 
+    private int length;
+
+    public Fibonacci (int length){
+        this.length = length;
+    }
     /**
      * Итератор, выполняющий обход последовательности
      * чисел Фибоначчи.
@@ -30,11 +35,13 @@ public class Fibonacci implements Iterable<Integer> {
         private int count;
         private int prevF;
         private int prevS;
+        private int length;
 
-        public FibonacciIterator() {
+        public FibonacciIterator(int length) {
             this.count = 0;
             this.prevF = 1;
             this.prevS = 0;
+            this.length = length;
         }
 
         /**
@@ -48,7 +55,7 @@ public class Fibonacci implements Iterable<Integer> {
         @Override
         public boolean hasNext() {
 //            throw new UnsupportedOperationException("Not implemented yet!");
-            return true;
+            return count < length;
         }
 
         /**
@@ -59,19 +66,18 @@ public class Fibonacci implements Iterable<Integer> {
          */
         @Override
         public Integer next() {
-            int res;
+            int res = 0;
             if (count == 0) {
-                count++;
-                return prevS;
-            } else if (count == 1){
-                count++;
-                return prevF;
+                res = prevS;
+            } else if (count == 1) {
+                res = prevF;
             } else {
                 res = prevF + prevS;
                 prevS = prevF;
                 prevF = res;
-                return res;
             }
+            count++;
+            return res;
         }
 //            throw new UnsupportedOperationException("Not implemented yet!");
     }
@@ -84,20 +90,7 @@ public class Fibonacci implements Iterable<Integer> {
      */
     @Override
     public Iterator<Integer> iterator() {
-        return new FibonacciIterator();
-    }
-
-
-    public List<Integer> getFirstNNumbers(int count) {
-        List<Integer> res = new ArrayList<>();
-
-        Iterator<Integer> it1 = iterator();
-
-        for(int i = 0; i < count; ++i) {
-            res.add(it1.next());
-        }
-
-        return res;
+        return new FibonacciIterator(this.length);
     }
 
 
