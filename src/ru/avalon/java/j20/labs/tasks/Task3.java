@@ -1,8 +1,11 @@
 package ru.avalon.java.j20.labs.tasks;
 
 import ru.avalon.java.j20.labs.Task;
+import ru.avalon.java.j20.labs.models.Fibonacci;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * Задание №3
@@ -13,6 +16,16 @@ public class Task3 implements Task {
 
     @Override
     public void run() {
+
+        int length = 20;
+        Fibonacci fibonacci = new Fibonacci(length);
+        Iterator<Integer> iterator = fibonacci.iterator();
+
+        int sum = 0;
+        while (iterator.hasNext()){
+            sum += iterator.next();
+        }
+
         /*
          * TODO(Студент): Выполнить задание №3
          *

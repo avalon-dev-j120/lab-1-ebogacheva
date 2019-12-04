@@ -1,6 +1,8 @@
 package ru.avalon.java.j20.labs.models;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * Модель получения последовательности чисел Фибоначчи.
@@ -18,11 +20,29 @@ import java.util.Iterator;
  */
 public class Fibonacci implements Iterable<Integer> {
 
+
+    private int length;
+
+    public Fibonacci (int length){
+        this.length = length;
+    }
     /**
      * Итератор, выполняющий обход последовательности
      * чисел Фибоначчи.
      */
     private static class FibonacciIterator implements Iterator<Integer> {
+
+        private int count;
+        private int prevF;
+        private int prevS;
+        private int length;
+
+        public FibonacciIterator(int length) {
+            this.count = 0;
+            this.prevF = 1;
+            this.prevS = 0;
+            this.length = length;
+        }
 
         /**
          * Определяет, есть ли следующее значение
@@ -34,7 +54,8 @@ public class Fibonacci implements Iterable<Integer> {
          */
         @Override
         public boolean hasNext() {
-            throw new UnsupportedOperationException("Not implemented yet!");
+//            throw new UnsupportedOperationException("Not implemented yet!");
+            return count < length;
         }
 
         /**
@@ -45,8 +66,20 @@ public class Fibonacci implements Iterable<Integer> {
          */
         @Override
         public Integer next() {
-            throw new UnsupportedOperationException("Not implemented yet!");
+            int res = 0;
+            if (count == 0) {
+                res = prevS;
+            } else if (count == 1) {
+                res = prevF;
+            } else {
+                res = prevF + prevS;
+                prevS = prevF;
+                prevF = res;
+            }
+            count++;
+            return res;
         }
+//            throw new UnsupportedOperationException("Not implemented yet!");
     }
 
     /**
@@ -57,6 +90,9 @@ public class Fibonacci implements Iterable<Integer> {
      */
     @Override
     public Iterator<Integer> iterator() {
-        return new FibonacciIterator();
+        return new FibonacciIterator(this.length);
     }
+
+
+
 }
